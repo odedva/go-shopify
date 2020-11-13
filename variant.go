@@ -54,7 +54,7 @@ type Variant struct {
 	TaxCode              string           `json:"tax_code,omitempty"`
 	Barcode              string           `json:"barcode,omitempty"`
 	ImageID              int64            `json:"image_id,omitempty"`
-	InventoryQuantity    int              `json:"inventory_quantity"`
+	InventoryQuantity    *int             `json:"inventory_quantity,omitempty"`
 	Weight               *decimal.Decimal `json:"weight,omitempty"`
 	WeightUnit           string           `json:"weight_unit,omitempty"`
 	OldInventoryQuantity int              `json:"old_inventory_quantity,omitempty"`
