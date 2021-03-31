@@ -42,7 +42,7 @@ type Dispute struct {
 	Status            string     `json:"status"`
 	EvidenceDueBy     *time.Time `json:"evidence_due_by,omitempty"`
 	EvidenceSentOn    *time.Time `json:"evidence_sent_on,omitempty"`
-	FinalizedOn       string     `json:"finalized_on"`
+	FinalizedOn       *time.Time `json:"finalized_on"`
 	InitiatedAt       *time.Time `json:"initiated_at,omitempty"`
 }
 
