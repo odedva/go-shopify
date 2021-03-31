@@ -114,6 +114,7 @@ type Client struct {
 	PriceRule                  PriceRuleService
 	InventoryItem              InventoryItemService
 	ShippingZone               ShippingZoneService
+	Dispute                    DisputeService
 }
 
 // A general response error that follows a similar layout to Shopify's response
