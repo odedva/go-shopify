@@ -17,6 +17,13 @@ type DisputeService interface {
 	Get(int64, interface{}) (*Dispute, error)
 }
 
+type DisputeListOptions struct {
+	SinceID     int64     `url:"since_id,omitempty"`
+	LastID      int64     `url:"last_id,omitempty"`
+	Status      string    `url:"status,omitempty"`
+	InitiatedAt time.Time `url:"initiated_at,omitempty"`
+}
+
 // DisputeServiceOp handles communication with the product related methods of
 // the Shopify API.
 type DisputeServiceOp struct {
