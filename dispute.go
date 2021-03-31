@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-const disputeBasePath = "shopyfi_payments/dispute"
+const disputeBasePath = "shopyfi_payments/disputes"
 
 // const disputeResourceName = "shopyfi_payments"
 
