@@ -8,7 +8,7 @@ import "fmt"
 type RefundService interface {
 	List(int64, interface{}) ([]Refund, error)
 	Get(int64, int64, interface{}) (*Refund, error)
-	Caculate(int64, Refund) (*Refund, error)
+	Calculate(int64, Refund) (*Refund, error)
 	Create(int64, Refund) (*Refund, error)
 }
 
@@ -44,9 +44,9 @@ func (s *RefundServiceOp) Get(orderID int64, refundID int64, options interface{}
 	return resource.Refund, err
 }
 
-// Caculate a new refund
-func (s *RefundServiceOp) Caculate(orderID int64, refund Refund) (*Refund, error) {
-	path := fmt.Sprintf("%s/%d/refunds/caculate.json", ordersBasePath, orderID)
+// Calculate a new refund
+func (s *RefundServiceOp) Calculate(orderID int64, refund Refund) (*Refund, error) {
+	path := fmt.Sprintf("%s/%d/refunds/calculate.json", ordersBasePath, orderID)
 	wrappedData := RefundResource{Refund: &refund}
 	resource := new(RefundResource)
 	err := s.client.Post(path, wrappedData, resource)
