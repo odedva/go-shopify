@@ -350,7 +350,7 @@ type Refund struct {
 	Restock           bool             `json:"restock,omitempty"`
 	Currency          string           `json:"currency,omitempty"`
 	UserId            int64            `json:"user_id,omitempty"`
-	Duties            RefundDuty       `json:"duties,omitempty"`
+	Duties            []RefundDuty     `json:"duties,omitempty"`
 	TotalDutiesSet    TotalDutiesSet   `json:"total_duties_set,omitempty"`
 	RefundShipping    RefundShipping   `json:"shipping,omitempty"`
 	RefundLineItems   []RefundLineItem `json:"refund_line_items,omitempty"`
