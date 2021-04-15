@@ -96,6 +96,7 @@ type Client struct {
 	Variant                    VariantService
 	Image                      ImageService
 	Transaction                TransactionService
+	Refund                     RefundService
 	Theme                      ThemeService
 	Asset                      AssetService
 	ScriptTag                  ScriptTagService
@@ -270,6 +271,7 @@ func NewClient(app App, shopName, token string, opts ...Option) *Client {
 	c.Variant = &VariantServiceOp{client: c}
 	c.Image = &ImageServiceOp{client: c}
 	c.Transaction = &TransactionServiceOp{client: c}
+	c.Refund = &RefundServiceOp{client: c}
 	c.Theme = &ThemeServiceOp{client: c}
 	c.Asset = &AssetServiceOp{client: c}
 	c.ScriptTag = &ScriptTagServiceOp{client: c}
