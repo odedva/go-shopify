@@ -340,14 +340,21 @@ type ClientDetails struct {
 }
 
 type Refund struct {
-	Id              int64            `json:"id,omitempty"`
-	OrderId         int64            `json:"order_id,omitempty"`
-	CreatedAt       *time.Time       `json:"created_at,omitempty"`
-	Note            string           `json:"note,omitempty"`
-	Restock         bool             `json:"restock,omitempty"`
-	UserId          int64            `json:"user_id,omitempty"`
-	RefundLineItems []RefundLineItem `json:"refund_line_items,omitempty"`
-	Transactions    []Transaction    `json:"transactions,omitempty"`
+	Id                int64            `json:"id,omitempty"`
+	OrderId           int64            `json:"order_id,omitempty"`
+	CreatedAt         *time.Time       `json:"created_at,omitempty"`
+	ProcessedAt       *time.Time       `json:"processed_at,omitempty"`
+	Note              string           `json:"note,omitempty"`
+	DiscrepancyReason string           `json:"discrepancy_reason,omitempty"`
+	Notify            bool             `json:"notify,omitempty"`
+	Restock           bool             `json:"restock,omitempty"`
+	Currency          string           `json:"currency,omitempty"`
+	UserId            int64            `json:"user_id,omitempty"`
+	Duties            RefundDuty       `json:"duties,omitempty"`
+	TotalDutiesSet    TotalDutiesSet   `json:"total_duties_set,omitempty"`
+	RefundShipping    RefundShipping   `json:"shipping,omitempty"`
+	RefundLineItems   []RefundLineItem `json:"refund_line_items,omitempty"`
+	Transactions      []Transaction    `json:"transactions,omitempty"`
 }
 
 type RefundLineItem struct {
@@ -357,6 +364,29 @@ type RefundLineItem struct {
 	LineItem   *LineItem        `json:"line_item,omitempty"`
 	Subtotal   *decimal.Decimal `json:"subtotal,omitempty"`
 	TotalTax   *decimal.Decimal `json:"total_tax,omitempty"`
+}
+
+type RefundShipping struct {
+	FullRefund bool             `json:"full_refund,omitempty"`
+	Amount     *decimal.Decimal `json:"amount,omitempty"`
+}
+
+type RefundDuty struct {
+	DutyId    int `json:"duty_id,omitempty"`
+	AmountSet struct {
+		ShopMoney        RefundMoneySet `json:"shop_money,omitempty"`
+		PresentmentMoney RefundMoneySet `json:"presentment_money,omitempty"`
+	} `json:"amount_set,omitempty"`
+}
+
+type TotalDutiesSet struct {
+	ShopMoney        RefundMoneySet `json:"shop_money,omitempty"`
+	PresentmentMoney RefundMoneySet `json:"presentment_money,omitempty"`
+}
+
+type RefundMoneySet struct {
+	Amount       *decimal.Decimal `json:"amount,omitempty"`
+	CurrencyCode string           `json:"currency_code,omitempty"`
 }
 
 // List orders
