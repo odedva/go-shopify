@@ -171,32 +171,45 @@ type DiscountCode struct {
 }
 
 type LineItem struct {
-	ID                         int64            `json:"id,omitempty"`
-	ProductID                  int64            `json:"product_id,omitempty"`
-	VariantID                  int64            `json:"variant_id,omitempty"`
-	Quantity                   int              `json:"quantity,omitempty"`
-	Price                      *decimal.Decimal `json:"price,omitempty"`
-	TotalDiscount              *decimal.Decimal `json:"total_discount,omitempty"`
-	Title                      string           `json:"title,omitempty"`
-	VariantTitle               string           `json:"variant_title,omitempty"`
-	Name                       string           `json:"name,omitempty"`
-	SKU                        string           `json:"sku,omitempty"`
-	Vendor                     string           `json:"vendor,omitempty"`
-	GiftCard                   bool             `json:"gift_card,omitempty"`
-	Taxable                    bool             `json:"taxable,omitempty"`
-	FulfillmentService         string           `json:"fulfillment_service,omitempty"`
-	RequiresShipping           bool             `json:"requires_shipping,omitempty"`
-	VariantInventoryManagement string           `json:"variant_inventory_management,omitempty"`
-	PreTaxPrice                *decimal.Decimal `json:"pre_tax_price,omitempty"`
-	Properties                 []NoteAttribute  `json:"properties,omitempty"`
-	ProductExists              bool             `json:"product_exists,omitempty"`
-	FulfillableQuantity        int              `json:"fulfillable_quantity,omitempty"`
-	Grams                      int              `json:"grams,omitempty"`
-	FulfillmentStatus          string           `json:"fulfillment_status,omitempty"`
-	TaxLines                   []TaxLine        `json:"tax_lines,omitempty"`
-	OriginLocation             *Address         `json:"origin_location,omitempty"`
-	DestinationLocation        *Address         `json:"destination_location,omitempty"`
-	AppliedDiscount            *AppliedDiscount `json:"applied_discount,omitempty"`
+	ID                         int64                `json:"id,omitempty"`
+	ProductID                  int64                `json:"product_id,omitempty"`
+	VariantID                  int64                `json:"variant_id,omitempty"`
+	Quantity                   int                  `json:"quantity,omitempty"`
+	Price                      *decimal.Decimal     `json:"price,omitempty"`
+	TotalDiscount              *decimal.Decimal     `json:"total_discount,omitempty"`
+	TotalDiscountSet           AmountSet            `json:"total_discount_set"`
+	DiscountAllocations        []DiscountAllocation `json:"discount_allocations"`
+	Title                      string               `json:"title,omitempty"`
+	VariantTitle               string               `json:"variant_title,omitempty"`
+	Name                       string               `json:"name,omitempty"`
+	SKU                        string               `json:"sku,omitempty"`
+	Vendor                     string               `json:"vendor,omitempty"`
+	GiftCard                   bool                 `json:"gift_card,omitempty"`
+	Taxable                    bool                 `json:"taxable,omitempty"`
+	FulfillmentService         string               `json:"fulfillment_service,omitempty"`
+	RequiresShipping           bool                 `json:"requires_shipping,omitempty"`
+	VariantInventoryManagement string               `json:"variant_inventory_management,omitempty"`
+	PreTaxPrice                *decimal.Decimal     `json:"pre_tax_price,omitempty"`
+	Properties                 []NoteAttribute      `json:"properties,omitempty"`
+	ProductExists              bool                 `json:"product_exists,omitempty"`
+	FulfillableQuantity        int                  `json:"fulfillable_quantity,omitempty"`
+	Grams                      int                  `json:"grams,omitempty"`
+	FulfillmentStatus          string               `json:"fulfillment_status,omitempty"`
+	TaxLines                   []TaxLine            `json:"tax_lines,omitempty"`
+	OriginLocation             *Address             `json:"origin_location,omitempty"`
+	DestinationLocation        *Address             `json:"destination_location,omitempty"`
+	AppliedDiscount            *AppliedDiscount     `json:"applied_discount,omitempty"`
+}
+
+type AmountSet struct {
+	ShopMoney        MoneySet `json:"shop_money"`
+	PresentmentMoney MoneySet `json:"presentment_money"`
+}
+
+type DiscountAllocation struct {
+	Amount                   *decimal.Decimal `json:"amount"`
+	DiscountApplicationIndex int              `json:"discount_application_index"`
+	AmountSet                AmountSet        `json:"amount_set"`
 }
 
 // UnmarshalJSON custom unmarsaller for LineItem required to mitigate some older orders having LineItem.Properies
@@ -381,17 +394,17 @@ type RefundShipping struct {
 type RefundDuty struct {
 	DutyId    int `json:"duty_id,omitempty"`
 	AmountSet struct {
-		ShopMoney        RefundMoneySet `json:"shop_money,omitempty"`
-		PresentmentMoney RefundMoneySet `json:"presentment_money,omitempty"`
+		ShopMoney        MoneySet `json:"shop_money,omitempty"`
+		PresentmentMoney MoneySet `json:"presentment_money,omitempty"`
 	} `json:"amount_set,omitempty"`
 }
 
 type TotalDutiesSet struct {
-	ShopMoney        RefundMoneySet `json:"shop_money,omitempty"`
-	PresentmentMoney RefundMoneySet `json:"presentment_money,omitempty"`
+	ShopMoney        MoneySet `json:"shop_money,omitempty"`
+	PresentmentMoney MoneySet `json:"presentment_money,omitempty"`
 }
 
-type RefundMoneySet struct {
+type MoneySet struct {
 	Amount       *decimal.Decimal `json:"amount,omitempty"`
 	CurrencyCode string           `json:"currency_code,omitempty"`
 }
