@@ -366,24 +366,37 @@ type Refund struct {
 	UserId            int64            `json:"user_id,omitempty"`
 	Duties            []RefundDuty     `json:"duties,omitempty"`
 	TotalDutiesSet    *TotalDutiesSet  `json:"total_duties_set,omitempty"`
-	RefundShipping    RefundShipping   `json:"shipping,omitempty"`
+	Shipping          RefundShipping   `json:"shipping,omitempty"`
 	RefundLineItems   []RefundLineItem `json:"refund_line_items,omitempty"`
 	Transactions      []Transaction    `json:"transactions,omitempty"`
 }
 
 type RefundLineItem struct {
-	Id                      int64            `json:"id,omitempty"`
-	Quantity                int              `json:"quantity,omitempty"`
-	LineItemId              int64            `json:"line_item_id,omitempty"`
-	RestockType             string           `json:"restock_type,omitempty"`
-	LocationId              int64            `json:"location_id,omitempty"`
-	LineItem                *LineItem        `json:"line_item,omitempty"`
-	Subtotal                *decimal.Decimal `json:"subtotal,omitempty"`
-	TotalTax                *decimal.Decimal `json:"total_tax,omitempty"`
-	Price                   *decimal.Decimal `json:"price,omitempty"`
-	DiscountedPrice         *decimal.Decimal `json:"discounted_price,omitempty"`
-	DiscountedTotalPrice    *decimal.Decimal `json:"discounted_total_price,omitempty"`
-	TotalCartDiscountAmount *decimal.Decimal `json:"total_cart_discount_amount,omitempty"`
+	Id                      int64             `json:"id,omitempty"`
+	Quantity                int               `json:"quantity,omitempty"`
+	LineItemId              int64             `json:"line_item_id,omitempty"`
+	RestockType             string            `json:"restock_type,omitempty"`
+	LocationId              int64             `json:"location_id,omitempty"`
+	LineItem                *LineItem         `json:"line_item,omitempty"`
+	Subtotal                *decimal.Decimal  `json:"subtotal,omitempty"`
+	TotalTax                *decimal.Decimal  `json:"total_tax,omitempty"`
+	TotalDiscount           *decimal.Decimal  `json:"total_discount,omitempty"`
+	TotalDiscountSet        *TotalDiscountSet `json:"total_discount_set,omitempty"`
+	Price                   *decimal.Decimal  `json:"price,omitempty"`
+	DiscountedPrice         *decimal.Decimal  `json:"discounted_price,omitempty"`
+	DiscountedTotalPrice    *decimal.Decimal  `json:"discounted_total_price,omitempty"`
+	TotalCartDiscountAmount *decimal.Decimal  `json:"total_cart_discount_amount,omitempty"`
+}
+
+type TotalDiscountSet struct {
+	ShopMoney struct {
+		Amount       *decimal.Decimal `json:"amount,omitempty"`
+		CurrencyCode string           `json:"currency_code,omitempty"`
+	} `json:"shop_money"`
+	PresentmentMoney struct {
+		Amount       *decimal.Decimal `json:"amount,omitempty"`
+		CurrencyCode string           `json:"currency_code,omitempty"`
+	} `json:"presentment_money"`
 }
 
 type RefundShipping struct {
