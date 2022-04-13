@@ -114,6 +114,7 @@ type Client struct {
 	DiscountCode               DiscountCodeService
 	PriceRule                  PriceRuleService
 	InventoryItem              InventoryItemService
+	InventoryLevel             InventoryLevelService
 	ShippingZone               ShippingZoneService
 	Dispute                    DisputeService
 }
@@ -289,6 +290,7 @@ func NewClient(app App, shopName, token string, opts ...Option) *Client {
 	c.DiscountCode = &DiscountCodeServiceOp{client: c}
 	c.PriceRule = &PriceRuleServiceOp{client: c}
 	c.InventoryItem = &InventoryItemServiceOp{client: c}
+	c.InventoryLevel = &InventoryLevelServiceOp{client: c}
 	c.ShippingZone = &ShippingZoneServiceOp{client: c}
 	c.Dispute = &DisputeServiceOp{client: c}
 
