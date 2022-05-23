@@ -354,6 +354,11 @@ type Transaction struct {
 	Source            string           `json:"source,omitempty"`
 	MaximumRefundable *decimal.Decimal `json:"maximum_refundable,omitempty"`
 	PaymentDetails    *PaymentDetails  `json:"payment_details,omitempty"`
+	Receipt           *PaymentReceipt  `json:"receipt,omitempty"`
+}
+
+type PaymentReceipt struct {
+	PaymentId string `json:"payment_id"`
 }
 
 type ClientDetails struct {
