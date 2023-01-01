@@ -1,4 +1,4 @@
-module github.com/imokyou/go-shopify/v3
+module github.com/odedva/go-shopify/v3
 
 go 1.13
 
